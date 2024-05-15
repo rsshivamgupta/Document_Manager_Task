@@ -1,20 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import DocumentGallery from './DocumentGallery';
+import AddDocumentModal from './AddDocumentModal';
+import './App.css'; // You can add your custom styles in App.css
 
-export default function App() {
+function App() {
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    
+    <div className="app">
+      <h1>Document Manager</h1>
+      <DocumentGallery />
+      <button className="add-document-btn" onClick={openModal}>+</button>
+      {showModal && <AddDocumentModal closeModal={closeModal} />}
+    </div>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
